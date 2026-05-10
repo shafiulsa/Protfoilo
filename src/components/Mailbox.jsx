@@ -5,13 +5,40 @@ Mailbox v2 by sirkitree [CC-BY] (https://creativecommons.org/licenses/by/3.0/) v
 */
 
 import { useGLTF } from "@react-three/drei";
-import React from "react";
+import { useFrame } from "@react-three/fiber";
+import React, { useEffect, useState } from "react";
+import * as THREE from "three"
 
 export function Mailbox(props) {
   const { nodes, materials } = useGLTF("/models/Mailbox v2.glb");
 
+  const [mailBoxHovered,setMailBoxHovered]=useState(false);
+
+
+
+useEffect(() => {
+  const emissiveColor = new THREE.Color("#ffc527");
+  Object.values(materials).forEach((material) => {
+    material.emissive = emissiveColor;
+  });
+}, []);
+
+useFrame(() => {
+  Object.values(materials).forEach((material) => {
+    material.emissiveIntensity = THREE.MathUtils.lerp(
+      material.emissiveIntensity,
+      mailBoxHovered ? 0.32 : 0,
+      0.1
+    );
+  });
+});
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null}
+    onPointerEnter={()=> setMailBoxHovered(true)}
+    onPointerLeave={()=>setMailBoxHovered(false)}
+    >
+
       <mesh
         geometry={nodes.group2028911354.geometry}
         material={materials.mat17}
