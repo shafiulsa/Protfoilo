@@ -1,74 +1,20 @@
-// import { useScroll } from "@react-three/drei";
-// import { useFrame } from "@react-three/fiber";
-// import { useState } from "react";
-
-// export const Interface = () => {
-//   const [hasScrolled, setHasScrolled] = useState(false);
-
-//   const scrollData=useScroll();
-
-//   useFrame(()=>{
-//     setHasScrolled(scrollData.offset>0)
-//   })
-
-
-//   return (
-//     <div className="interface">
-//       <div className="sections">
-//         {/* HOME */}
-//         <section className="section section--bottom">
-//            <MotionConfig.div
-//             className="scroll-down"
-//             initial={{
-//               opacity: 0,
-//             }}
-//             animate={{
-//               opacity: hasScrolled ? 0 : 1,
-//             }}
-//           >
-//             <motion.div
-//               className="scroll-down__wheel"
-//               initial={{
-//                 translateY: 0,
-//               }}
-//               animate={{
-//                 translateY: 4,
-//               }}
-//               transition={{
-//                 duration: 0.4,
-//                 repeatDelay: 0.5,
-//                 repeatType: "reverse",
-//                 repeat: Infinity,
-//               }}
-//             ></motion.div>
-//           </motion.div>
-//         </section>
-
-//         {/* SKILLS */}
-//         <section className="section section--right">SKILLS</section>
-
-//         {/* PROJECTS */}
-//         <section className="section section--left">PROJECTS</section>
-
-//         {/* CONTACT */}
-//         <section className="section section--left">CONTACT</section>
-//       </div>
-//     </div>
-//   );
-// };
-
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useState } from "react";
-import { motion } from "framer-motion"; // ১. ইম্পোর্ট যোগ করা হয়েছে
+import { motion } from "framer-motion"; 
 import { config } from "../config";
+import { atom, useAtom } from "jotai";
+
+export const projectAtom=atom(config.projects[0]);
+
 
 export const Interface = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
+  const [_project,setProject]=useAtom(projectAtom);
+
 
   useFrame(() => {
-    // ২. পারফরম্যান্স অপ্টিমাইজেশন: শুধুমাত্র স্টেট চেঞ্জ হলেই আপডেট হবে
     const scrolled = scrollData.offset > 0;
     if (scrolled !== hasScrolled) {
       setHasScrolled(scrolled);
@@ -190,6 +136,7 @@ export const Interface = () => {
                 key={project.name}
                 className="project"
                 initial={{ opacity: 0 }}
+                onMouseEnter={()=>setProject(project)}
                 variants={{
                   visible: {
                     opacity: 1,
