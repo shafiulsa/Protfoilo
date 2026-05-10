@@ -19,9 +19,15 @@ function App() {
             <group position-y={-1}>
               <Experience />
             </group>
-          </MotionConfig>
+          </MotionConfig >
+
           <Scroll html>
+            <MotionConfig transition={{
+              duration:1
+            }}>
+
             <Interface />
+            </MotionConfig>
           </Scroll>
         </ScrollControls>
       </Canvas>

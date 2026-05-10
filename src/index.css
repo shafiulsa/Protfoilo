@@ -52,3 +52,68 @@ a {
 .section--right{
   justify-content: flex-end;
 }
+
+
+/* Home Section */
+.section--down{
+  width: 28px;
+  height: 42px;
+  border: 2px solid #1A202C;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+.scroll-down__wheel{
+  width: 3px;
+  height: 10px;
+  background-color: #1A202C;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+/* SKILLS SECTION */
+
+.skills {
+  padding: 1rem;
+}
+
+.skill {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 320px;
+  max-width: 100%;
+}
+.skill__label {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+ 
+.skill__label__image {
+  height: 32px;
+  width: 32px;
+}
+.skill__label__name {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.skill__level {
+  background: #000;
+  height: 8px;
+  border-radius: 8px;
+  width: 100%;
+}
+.skill__level__bar {
+  background: var(--primary-color);
+  height: 100%;
+  border-radius: 8px;
+  width: 0px;
+} 
