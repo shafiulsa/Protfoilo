@@ -121,25 +121,25 @@ export const Interface = () => {
                 opacity: 1,
               },
             }}
-            // transition={{
-            //   duration: 1,
-            //   delay: idx * 0.62,
+          // transition={{
+          //   duration: 1,
+          //   delay: idx * 0.62,
 
-            // }}
+          // }}
           >
             {config.skills.map((skill, idx) => (
               <motion.div key={skill.name}
-                    className="skill"
-                    initial={{ opacity: 0 }}
-                    variants={{
-                      visible: {
-                        opacity: 1,
-                      },
-                    }}
-                    transition={{
-                      duration: 1,
-                      delay: idx * 0.2,
-                    }}
+                className="skill"
+                initial={{ opacity: 0 }}
+                variants={{
+                  visible: {
+                    opacity: 1,
+                  },
+                }}
+                transition={{
+                  duration: 1,
+                  delay: idx * 0.2,
+                }}
               >
                 <div className="skill__label">
                   <img
@@ -148,7 +148,7 @@ export const Interface = () => {
                     alt={skill.name}
                   />
                   <h2 className="skill__label__name">{skill.name}</h2>
-                </div> 
+                </div>
                 <div className="skill__level">
                   <motion.div
                     className="skill__level__bar"
@@ -170,7 +170,54 @@ export const Interface = () => {
         </section>
 
         {/* PROJECTS */}
-        <section className="section section--left">PROJECTS</section>
+        <section className="section section--left">
+        
+
+          <motion.div
+            className="projects"
+            whileInView={"visible"}
+            initial={{
+              opacity: 0,
+            }}
+            variants={{
+              visible: {
+                opacity: 1,
+              },
+            }}
+          >
+            {config.projects.map((project, idx) => (
+              <motion.div
+                key={project.name}
+                className="project"
+                initial={{ opacity: 0 }}
+                variants={{
+                  visible: {
+                    opacity: 1,
+                  },
+                }}
+                transition={{
+                  duration: 1,
+                  delay: idx * 0.5,
+                }}
+              >
+                <a href={project.link} target="_blank">
+                  <img
+                    className="project__image"
+                    src={project.image}
+                    alt={project.name}
+                  />
+                  <div className="project__details">
+                    <h2 className="project__details__name">{project.name}</h2>
+                    <p className="project__details__description">
+                      {project.description}
+                    </p>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+
+        </section>
 
         {/* CONTACT */}
         <section className="section section--left">CONTACT</section>
