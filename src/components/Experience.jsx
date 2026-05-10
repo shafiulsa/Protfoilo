@@ -1,13 +1,11 @@
 import { Environment } from "@react-three/drei";
+import Man from "./Man";
 
 export const Experience = () => {
   return (
     <>
       <Environment preset="sunset" />
-      <mesh>
-        <boxGeometry />
-        <meshStandardMaterial color="white" />
-      </mesh>
+      <Man scale={0.8} />
     </>
   );
 };
