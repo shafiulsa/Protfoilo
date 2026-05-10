@@ -8,9 +8,10 @@ Source: https://sketchfab.com/3d-models/rust-space-suit-730cd3ed773b4ce2bd60996d
 Title: Rust - Space Suit
 */
 
-import React, { useEffect, useState } from 'react'
-import { useGraph } from '@react-three/fiber'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import React, { useEffect, useRef, useState } from 'react'
+import { useFrame, useGraph } from '@react-three/fiber'
+import { useGLTF, useAnimations, useScroll } from '@react-three/drei'
+import * as THREE from 'three'
 import { SkeletonUtils } from 'three-stdlib'
 
 export default function Man(props) {
@@ -20,11 +21,46 @@ export default function Man(props) {
   const { nodes, materials } = useGraph(clone)
   const { actions, names } = useAnimations(animations, group);
   console.log(names);
+  // ['Idle', 'Walk', 'Jump', 'Gun']
+
+  const scrollData = useScroll();
+  const lastScroll = useRef(0);
+  const currentAnimation = useRef("Idle");
 
   useEffect(() => {
-
-    actions["Walk"]?.reset().fadeIn(0.5).play();  
+    actions[currentAnimation.current]?.reset().fadeIn(0.5).play();
+    return () => actions[currentAnimation.current]?.fadeOut(0.5);
   }, [actions]);
+
+  useFrame(() => {
+    const scrollDelta = scrollData.offset - lastScroll.current;
+    const isScrolling = Math.abs(scrollDelta) > 0.0001;
+    const nextAnimation = isScrolling ? "Walk" : "Idle";
+
+    if (nextAnimation !== currentAnimation.current) {
+      actions[currentAnimation.current]?.fadeOut(0.5);
+      actions[nextAnimation]?.reset().fadeIn(0.5).play();
+      currentAnimation.current = nextAnimation;
+    }
+
+    // Rotation logic
+    let targetRotation = 0;
+    if (isScrolling) {
+      targetRotation = scrollDelta > 0 ? 0 : Math.PI;
+    } else {
+      targetRotation = 0;
+    }
+
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetRotation,
+      0.1
+    );
+
+    lastScroll.current = scrollData.offset;
+  });
+
+
 
   return (
     <group ref={group} {...props} dispose={null}>
