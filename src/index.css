@@ -166,6 +166,61 @@ a {
   margin: 0;
 }
 
+/* Loading Screen Styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.loading-screen__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loading-screen__text {
+  font-family: "Roboto Slab", serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.loading-screen__progress {
+  width: 240px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.loading-screen__progress__bar {
+  height: 100%;
+  background: var(--primary-color);
+}
+
+.loading-screen__percentage {
+  font-family: "Roboto Slab", serif;
+  font-size: 1rem;
+  color: var(--text-light-color);
+  font-weight: bold;
+  margin: 0;
+}
+
+
 .menu {
   display: flex;
   justify-content: space-between;

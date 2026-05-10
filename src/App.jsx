@@ -6,11 +6,13 @@ import { MotionConfig } from "framer-motion";
 import {Interface} from "./components/Interface";
 import { Leva } from "leva";
 import { Menu } from "./components/Menu";
+import { LoadingScreen } from "./components/LoadingScreen";
 
 function App() {
   return (
     <>
-    {/* <Leva hidden/> */}
+      <LoadingScreen />
+      {/* <Leva hidden/> */}
       <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }}>
         <color attach="background" args={["#f5f3ee"]} />
         <fog attach="fog" args={["#f5f3ee", 10, 50]} />
