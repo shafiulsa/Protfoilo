@@ -4,6 +4,9 @@ export const config = {
     home:{
         title:"Hi",
         description:" Developer",
-    }   
+    }   ,
+    contact:{
+        mail :"contact@me.com"
+    }
 
 }
