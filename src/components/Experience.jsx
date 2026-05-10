@@ -6,7 +6,7 @@ import {
   useScroll,
   Center,
 } from "@react-three/drei";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionTitle } from "./SectionTitle";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -129,7 +129,24 @@ export const Experience = () => {
   //     step: 0.01,
   //   },
   // });
+useEffect(() => {
+  const handleHashChange = () => {
+    const sectionIndex = config.sections.indexOf(
+      window.location.hash.replace("#", "")
+    );
 
+    if (sectionIndex >= 0) {
+      scrollData.el.scrollTo(
+        0,
+        (sectionIndex / (config.sections.length - 1)) *
+          (scrollData.el.scrollHeight - scrollData.el.clientHeight)
+      );
+    }
+  };
+
+  window.addEventListener("hashchange", handleHashChange);
+  return () => window.removeEventListener("hashchange", handleHashChange);
+}, []);
 
   return (
     <>

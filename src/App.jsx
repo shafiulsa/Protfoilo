@@ -5,6 +5,7 @@ import { config } from "./config";
 import { MotionConfig } from "framer-motion";
 import {Interface} from "./components/Interface";
 import { Leva } from "leva";
+import { Menu } from "./components/Menu";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         </ScrollControls>
       {/* <OrbitControls/> */}
       </Canvas>
+      <Menu/>
     </>
   );
 }
