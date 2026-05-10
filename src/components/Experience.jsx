@@ -1,4 +1,4 @@
-import { Environment, Float, MeshDistortMaterial, useScroll } from "@react-three/drei";
+import { Environment, Float, MeshDistortMaterial, RoundedBox, useScroll } from "@react-three/drei";
 import Man from "./Man";
 import { useRef } from "react";
 import { SectionTitle } from "./SectionTitle";
@@ -12,6 +12,12 @@ import { Center } from "@react-three/drei";
 import { CouchSmall } from "./CouchSmall";
 import { Lamp } from "./Lamp";
 import BookCase from "./BookCase";
+import { Monitor } from "./Monitor";
+import { Balloon } from "./Balloon";
+import { ParkBench } from "./ParkBench";
+import { Mailbox } from "./Mailbox";
+import { Pigeon } from "./Pigeon";
+
 
 const SECTION_DISTANCE = 10;
 export const Experience = () => {
@@ -24,7 +30,7 @@ export const Experience = () => {
   return (
     <>
       <Environment preset="sunset" />
-      <Man scale={0.8} />
+      <Man scale={0.6} />
 
       <group ref={sceneContainer}>
         {/* Home */}
@@ -107,11 +113,74 @@ export const Experience = () => {
         </group>
         {/* Projects */}
         <group position-z={-SECTION_DISTANCE * 2}>
-          <SectionTitle position-x={.5}>Projects</SectionTitle>
+          <group position-x={1}>
+            <SectionTitle
+              position-x={-0.5}
+              position-z={0}
+              rotation-y={-Math.PI / 6}
+            >
+              PROJECTS
+            </SectionTitle>
+            <group
+              position-x={0.5}
+              position-z={0}
+              rotation-y={-Math.PI / 6}
+              scale={0.8}
+            >
+              <Monitor
+                scale={0.02}
+                position-y={1}
+                rotation-y={-Math.PI / 2}
+                position-z={-1}
+              />
+              <RoundedBox scale-x={2} position-y={0.5} position-z={-1}>
+                <meshStandardMaterial color="white" />
+              </RoundedBox>
+            </group>
+
+          </group>
         </group>
         {/* Contact */}
         <group position-z={-SECTION_DISTANCE * 3}>
-          <SectionTitle position-x={.5}>Contact</SectionTitle>
+          <SectionTitle position-x={-2} position-z={0.6}>Contact</SectionTitle>
+        <group>
+          <ParkBench
+            scale={0.5}
+            position-x={-0.5}
+            position-z={-2.5}
+            rotation-y={-Math.PI / 4}
+          />
+          <group position-y={2.2} position-z={-0.5}>
+            <Float floatIntensity={2} rotationIntensity={1.5}>
+              <Balloon scale={1.5} position-x={-0.5} color="#71a2d9" />
+            </Float>
+            <Float
+              floatIntensity={1.5}
+              rotationIntensity={2}
+              position-z={0.5}
+            >
+              <Balloon scale={1.3} color="#d97183" />
+            </Float>
+            <Float speed={2} rotationIntensity={2}>
+              <Balloon scale={1.6} position-x={0.4} color="yellow" />
+            </Float>
+          </group>
+          <Mailbox
+  scale={0.25}
+  rotation-y={1.25 * Math.PI}
+  position-x={1}
+  position-y={0.25}
+  position-z={0.5}
+/>
+<Float floatIntensity={1.5} speed={3}>
+  <Pigeon
+    position-x={2}
+    position-y={1.5}
+    position-z={-0.5}
+    scale={0.3}
+  />
+</Float>
+        </group>
         </group>
       </group>
     </>

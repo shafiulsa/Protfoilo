@@ -4,15 +4,24 @@ Command: npx gltfjsx@6.2.3 public/models/Pigeon.gltf -o src/components/Pigeon.js
 Pigeon by Quaternius (https://poly.pizza/m/9NGlBTpDEr)
 */
 
-import { useGLTF } from "@react-three/drei";
-import React, { useRef } from "react";
+import { useAnimations, useGLTF } from "@react-three/drei";
+import React, { useEffect, useRef, useState } from "react";
 
 export function Pigeon(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/models/Pigeon.gltf");
 
+  const [animation, setAnimation] = useState("Flying_Idle");
+  const { actions } = useAnimations(animations, group);
+  useEffect(() => {
+    actions[animation].reset().fadeIn(0.5).play();
+    return () => {
+      actions[animation].reset().fadeOut(0.5);
+    }
+  }, [animation])
+
   return (
-    <group {...props} dispose={null} ref={group}>
+    <group {...props} dispose={null} ref={group} onPointerEnter={()=> setAnimation("Yes")} onPointerDown={()=> setAnimation("Flying_Idle")}>
       <group name="Scene">
         <group name="CharacterArmature">
           <primitive object={nodes.Root} />
