@@ -1,4 +1,4 @@
-import { Environment, Float, useScroll } from "@react-three/drei";
+import { Environment, Float, MeshDistortMaterial, useScroll } from "@react-three/drei";
 import Man from "./Man";
 import { useRef } from "react";
 import { SectionTitle } from "./SectionTitle";
@@ -8,8 +8,10 @@ import { Star } from "./Star"
 import { MacBookPro } from "./MacBookPro"
 import { PalmTree } from "./PalmTree"
 import { config } from "../config"
-import { Center } from "@react-three/drei"; 
-
+import { Center } from "@react-three/drei";
+import { CouchSmall } from "./CouchSmall";
+import { Lamp } from "./Lamp";
+import BookCase from "./BookCase";
 
 const SECTION_DISTANCE = 10;
 export const Experience = () => {
@@ -46,35 +48,62 @@ export const Experience = () => {
             />
             <Float floatIntensity={0.6}>
               {/* <Center disableY disableZ> */}
-                <SectionTitle
-                  size={0.8}
-                  position-y={1.6}
-                  position-z={-3}
-                  position-x={-2}  
-                  bevelEnabled
-                  bevelThickness={0.3}
-                >
-                  {config.home.title}
-                </SectionTitle>
+              <SectionTitle
+                size={0.8}
+                position-y={1.6}
+                position-z={-3}
+                position-x={2}
+                bevelEnabled
+                bevelThickness={0.3}
+              >
+                {config.home.title}
+              </SectionTitle>
               {/* </Center> */}
             </Float>
-           <Center disableY disableZ>
-                <SectionTitle
-                  size={1.2}
-                  position-y={-.6}
-                  position-z={-3}
-                  bevelEnabled
-                  bevelThickness={0.3}
-                >
-                  {config.home.description}
-                </SectionTitle>
-              </Center>
-     
+            <Center disableY disableZ>
+              <SectionTitle
+                size={1.2}
+                position-y={-.6}
+                position-z={-3}
+                bevelEnabled
+                bevelThickness={0.3}
+              >
+                {config.home.description}
+              </SectionTitle>
+            </Center>
+
           </group>
         </group>
         {/* Skills */}
         <group position-z={-SECTION_DISTANCE}>
-          <SectionTitle position-x={.5}>Skills</SectionTitle>
+          <group position-x={-2}>
+
+            <SectionTitle position-x={.5}>Skills</SectionTitle>
+            <BookCase position-z={-2} />
+            <CouchSmall
+              scale={0.4}
+              position-z={0}
+              position-x={-0.2}
+              rotation-y={Math.PI / 3}
+            />
+            <Lamp
+              position-z={0.6}
+              position-x={-0.4}
+              position-y={-0.8}
+              rotation-y={-Math.PI}
+            />
+          </group>
+          <mesh position-y={2} position-z={-4} position-x={2}>
+            <sphereGeometry args={[1, 64, 64]} />
+            <MeshDistortMaterial
+              opacity={0.8}
+              transparent
+              distort={1}
+              speed={5}
+              color="yellow"
+            />
+          </mesh>
+
         </group>
         {/* Projects */}
         <group position-z={-SECTION_DISTANCE * 2}>
