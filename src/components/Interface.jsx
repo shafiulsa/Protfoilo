@@ -1,17 +1,17 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useState } from "react";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import { config } from "../config";
 import { atom, useAtom } from "jotai";
 
-export const projectAtom=atom(config.projects[0]);
+export const projectAtom = atom(config.projects[0]);
 
 
 export const Interface = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
-  const [_project,setProject]=useAtom(projectAtom);
+  const [_project, setProject] = useAtom(projectAtom);
 
 
   useFrame(() => {
@@ -117,7 +117,7 @@ export const Interface = () => {
 
         {/* PROJECTS */}
         <section className="section section--left">
-        
+
 
           <motion.div
             className="projects"
@@ -136,7 +136,7 @@ export const Interface = () => {
                 key={project.name}
                 className="project"
                 initial={{ opacity: 0 }}
-                onMouseEnter={()=>setProject(project)}
+                onMouseEnter={() => setProject(project)}
                 variants={{
                   visible: {
                     opacity: 1,
@@ -167,7 +167,45 @@ export const Interface = () => {
         </section>
 
         {/* CONTACT */}
-        <section className="section section--left">CONTACT</section>
+        <section className="section section--left"><motion.div
+          className="contact"
+          whileInView={"visible"}
+          initial={{
+            opacity: 0,
+          }}
+          variants={{
+            visible: {
+              opacity: 1,
+            },
+          }}
+        >
+          <h1 className="contact__name">{config.contact.name}</h1>
+          <p className="contact__address">{config.contact.address}</p>
+          <div className="contact__socials">
+            <a href={config.contact.socials.linkedin} target="_blank">
+              <img
+                className="contact__socials__icon"
+                src="icons/linkedin.png"
+                alt="linkedin"
+              />
+            </a>
+            <a href={config.contact.socials.twitter} target="_blank">
+              <img
+                className="contact__socials__icon"
+                src="icons/twitter.png"
+                alt="twitter"
+              />
+            </a>
+            <a href={`mailto:${config.contact.mail}`} target="_blank">
+              <img
+                className="contact__socials__icon"
+                src="icons/email.png"
+                alt="email"
+              />
+            </a>
+          </div>
+        </motion.div>
+        </section>
       </div>
     </div>
   );
